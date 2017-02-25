@@ -1,17 +1,18 @@
 from Tkinter import *
-from PIL import *
+from PIL import Image, ImageTk 
 
 def commandTest():
     print "test"
 
+def makeButtons(root)
 root = Tk()
 screenWidth = root.winfo_screenwidth()
 screenHeight = root.winfo_screenheight()
 root.geometry('%dx%d+%d+%d' % (screenWidth, screenHeight, 0, 0))
 
-filePath = '~/HackIllinois2017/Hackathon2017/Icons/HalfResticon.png'
+filePath = 'QuarterNoteicon.png'
 iconImage = Image.open(filePath)
-icon = PhotoImage(iconImage)
+icon = ImageTk.PhotoImage(iconImage)
 
 # main area
 mainarea = Frame(root, bg='#FFA', width=screenWidth-200)
@@ -22,7 +23,7 @@ sidebar = Frame(root, bg='#FFF', width=200)
 sidebar.pack(expand=False, fill='both', side='left', anchor='nw')
 
 testButton = Button(sidebar, image=icon, command=commandTest)
-testButton.place(x=0,y=0)
+testButton.place(x=25,y=0)
 
 root.mainloop()
 
