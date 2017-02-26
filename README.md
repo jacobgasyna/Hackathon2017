@@ -11,3 +11,6 @@ second notes, visual and audio cues, app capability, and much more.
 
 Thank you for taking the time to look at our project.
 
+Project Dependencies
+ * Tkinter - GUI library (usually comes with python but might not)
+ * Pillow - image handling
