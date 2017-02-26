@@ -1,15 +1,41 @@
 import tkinter
 from tkinter import *
 from PIL import Image, ImageTk
+from time import time
 
+currentNoteIndex = 0
+expectedNoteTimes = []
 
-def commandTest():
-    print ("test")
+# milisecond window user has to "hit" a note
+# length is twice timeRadiusInMili centered around the exact expected time
+timeRadiusInMili = 500
+checkDelay = 200
+startTime = int(round(time() * 1000))
 
-#def makeButtons(sidebar):
-    #""" place all the buttons in the sidebar"""
-    #TODO add commands for each button
+def increment_current_note_index():
+    global currentNoteIndex
+    if (currentNoteIndex < len(expectedNoteTimes) - 1):
+        currentNoteIndex += 1
+    else:
+        print ("No more notes")
 
+def key_press(event):
+    currentTime = int(round(time() * 10000))
+    delta = currentTime - expectedNoteTimes[currentNoteIndex]
+    if (delta < -timeRadius):
+        print ("Rushing!")
+    elif (delta > timeRadius):
+        print ("Dragging!")
+    else:
+        print ("You hit it!")
+
+def check():
+    currentTime = int(round(time() * 1000))
+    delta = abs(currentTime - expectedNoteTimes[currentNodeIndex])
+    if(delta > timeRadiusInMili):
+        print ("missed")
+        increment_current_note_index()
+        
 root = Tk()
 screenWidth = root.winfo_screenwidth()
 screenHeight = root.winfo_screenheight()
@@ -263,6 +289,7 @@ delButton.place(x=1050, y=100)
 
 
 if __name__ == '__main__':
+    root.after(1000, check)
     root.mainloop()
     
 #Button calls and looping
