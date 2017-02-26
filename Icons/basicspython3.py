@@ -4,13 +4,16 @@ from PIL import Image, ImageTk
 from time import time
 
 currentNoteIndex = 0
-expectedNoteTimes = []
+expectedNoteTimes = [0]
 
 # milisecond window user has to "hit" a note
 # length is twice timeRadiusInMili centered around the exact expected time
 timeRadiusInMili = 500
 checkDelay = 200
 startTime = int(round(time() * 1000))
+
+# the duration of a 32nd note in miliseconds given a tempo
+duration32InMili = 10
 
 def increment_current_note_index():
     global currentNoteIndex
@@ -35,6 +38,17 @@ def check():
     if(delta > timeRadiusInMili):
         print ("missed")
         increment_current_note_index()
+
+def add_note_time(noteType, isRest):
+    lastIndex = len(expectedNoteTimes) - 1
+    lastTime = expectedNoteTimes[lastIndex]
+    nextNoteTime = lastTime + (noteType * duration32InMili)
+    # if the thing we're adding is a rest, we don't add another time but replace the last
+    # that's because if we added another index, the user would be expected to "hit" a rest
+    if (isRest):
+        expextedNoteTimes[lastIndex] = nextNoteTime
+    else:
+        expectedNoteTimes.append(nextNoteTime)
         
 root = Tk()
 screenWidth = root.winfo_screenwidth()
@@ -67,6 +81,7 @@ def wnbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=wnbimage)
     pixelplace+=3968
+    add_note_time(32, False)
 
 def wnrbutton():
     global pixelplace
@@ -76,6 +91,7 @@ def wnrbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=wnrbimage)
     pixelplace+=39
+    add_note_time(32, True)
 
 def hnbutton():
     global pixelplace
@@ -85,6 +101,7 @@ def hnbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=hnbimage)
     pixelplace+=1920
+    add_note_time(16, False)
 
 def hnrbutton():
     global pixelplace
@@ -94,6 +111,7 @@ def hnrbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=hnrbimage)
     pixelplace+=39
+    add_note_time(16, True)
 
 def qnbutton():
     global pixelplace
@@ -103,6 +121,7 @@ def qnbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=qnbimage)
     pixelplace+=400
+    add_note_time(8, False)
 
 def qnrbutton():
     global pixelplace
@@ -112,6 +131,7 @@ def qnrbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=qnrbimage)
     pixelplace+=39
+    add_note_time(8, True)
 
 def enbutton():
     global pixelplace
@@ -121,6 +141,7 @@ def enbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=enbimage)
     pixelplace+=200
+    add_note_time(4, False)
 
 def enrbutton():
     global pixelplace
@@ -130,6 +151,7 @@ def enrbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=enrbimage)
     pixelplace+=39
+    add_note_time(4, True)
 
 def snbutton():
     global pixelplace
@@ -139,6 +161,7 @@ def snbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=snbimage)
     pixelplace+=39
+    add_note_time(2, False)
 
 def snrbutton():
     global pixelplace
@@ -148,6 +171,7 @@ def snrbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=snrbimage)
     pixelplace+=39
+    add_note_time(2, True)
 
 def tnbutton():
     global pixelplace
@@ -157,6 +181,7 @@ def tnbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=tnbimage)
     pixelplace+=39
+    add_note_time(1, False)
 
 def tnrbutton():
     global pixelplace
@@ -166,6 +191,7 @@ def tnrbutton():
     label.pack
     mainarea.create_image(pixelplace, 370, image=tnrbimage)
     pixelplace+=39
+    add_note_time(1, True)
 
 # placement line
 line=mainarea.create_line(0,0,0,340,tags= 'line')
