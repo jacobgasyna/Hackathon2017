@@ -1,14 +1,64 @@
-import tkinter
 from tkinter import *
 from PIL import Image, ImageTk
+from time import time
 
+initial = 445
+currentNoteIndex = 0
+expectedNoteTimes = [initial]
 
-def commandTest():
-    print ("test")
+# milisecond window user has to "hit" a note
+# length is twice timeRadiusInMili centered around the exact expected time
+timeRadiusInMili = 500
+checkDelay = 1000
+performCheck = False
 
-#def makeButtons(sidebar):
-    #""" place all the buttons in the sidebar"""
-    #TODO add commands for each button
+# the duration of a 32nd note in miliseconds given a tempo
+duration32InMili = 175
+
+def increment_current_note_index():
+    global currentNoteIndex
+    if (currentNoteIndex < len(expectedNoteTimes) - 1):
+        currentNoteIndex += 1
+    else:
+        #print ("No more notes")
+        performCheck = False
+
+def key_press(event):
+    global currentNoteIndex
+    global startTime
+    currentTime = int(round(time() * 1000)) - startTime
+    print(currentTime)
+    delta = currentTime - expectedNoteTimes[currentNoteIndex]
+    currentTime
+    #if (delta < -timeRadiusInMili):
+    #    print ("Rushing!")
+    #elif (delta > timeRadiusInMili):
+    #    print ("Dragging!")
+    #else:
+    #    print ("You hit it!")
+
+def check():
+    global currentNoteIndex
+    currentTime = int(round(time() * 1000))
+    delta = abs(currentTime - expectedNoteTimes[currentNoteIndex])
+    if(delta > timeRadiusInMili):
+        #print ("missed")
+        increment_current_note_index()
+        if performCheck:
+            root.after(checkDelay, check)
+
+def add_note_time(noteType, isRest):
+    lastIndex = len(expectedNoteTimes) - 1
+    lastTime = expectedNoteTimes[lastIndex]
+    nextNoteTime = lastTime + (noteType * duration32InMili)
+    # if the thing we're adding is a rest, we don't add another time but replace the last
+    # that's because if we added another index, the user would be expected to "hit" a rest
+    if (isRest):
+        expectedNoteTimes[lastIndex] = nextNoteTime
+    else:
+        expectedNoteTimes.append(nextNoteTime)
+        
+
 
 root = Tk()
 screenWidth = root.winfo_screenwidth()
@@ -23,6 +73,12 @@ mainarea.create_line(100,385,1350,385,width=1)
 mainarea.create_line(100,355,1350,355,width=1)
 mainarea.create_line(100,340,1350,340,width=1)
 mainarea.create_line(100,325,1350,325,width=1)
+logoimage=ImageTk.PhotoImage(file='Logo.png')
+label=Label(image=logoimage)
+label.image= logoimage
+label.pack
+mainarea.create_image(1100, 150, image=logoimage)
+
 
 
 # sidebar
@@ -42,9 +98,10 @@ def wnbutton():
         label=Label(image=wnbimage)
         label.image= wnbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=wnbimage)
+        mainarea.create_image(pixelplace, 355, image=wnbimage)
         pixelplace+=1650
         counter+=32
+        add_note_time(32, False)
     else:
         print("too many notes")
         
@@ -56,9 +113,10 @@ def wnrbutton():
         label=Label(image=wnrbimage)
         label.image= wnrbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=wnrbimage)
+        mainarea.create_image(pixelplace, 355, image=wnrbimage)
         pixelplace+=1650
         counter+=32
+        add_note_time(32, True)
     else:
         print("too many notes")
 
@@ -70,23 +128,25 @@ def hnbutton():
         label=Label(image=hnbimage)
         label.image= hnbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=hnbimage)
+        mainarea.create_image(pixelplace, 340, image=hnbimage)
         pixelplace+=550
         counter+=16
+        add_note_time(16, False)
     else:
         print("too many notes")
 
 def hnrbutton():
     global pixelplace
     global counter
-    if counter+32<33:
+    if counter+16<33:
         hnrbimage=ImageTk.PhotoImage(file='HalfResticon.png')
         label=Label(image=hnrbimage)
         label.image= hnrbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=hnrbimage)
+        mainarea.create_image(pixelplace, 355, image=hnrbimage)
         pixelplace+=550
         counter+=16
+        add_note_time(16, True)
     else:
         print("too many notes")
 
@@ -98,9 +158,10 @@ def qnbutton():
         label=Label(image=qnbimage)
         label.image= qnbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=qnbimage)
+        mainarea.create_image(pixelplace, 340, image=qnbimage)
         pixelplace+=337
         counter+=8
+        add_note_time(8, False)
     else:
         print("too many notes")
     
@@ -113,9 +174,10 @@ def qnrbutton():
         label=Label(image=qnrbimage)
         label.image= qnrbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=qnrbimage)
+        mainarea.create_image(pixelplace, 355, image=qnrbimage)
         pixelplace+=337
         counter+=8
+        add_note_time(8, True)
     else:
         print("too many notes")
 
@@ -127,9 +189,10 @@ def enbutton():
         label=Label(image=enbimage)
         label.image= enbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=enbimage)
+        mainarea.create_image(pixelplace, 340, image=enbimage)
         pixelplace+=147
         counter+=4
+        add_note_time(4, False)
     else:
         print("too many notes")
 
@@ -142,9 +205,10 @@ def enrbutton():
         label=Label(image=enrbimage)
         label.image= enrbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=enrbimage)
+        mainarea.create_image(pixelplace, 373, image=enrbimage)
         pixelplace+=147
         counter+=4
+        add_note_time(4, True)
     else:
         print("too many notes")
 
@@ -156,9 +220,10 @@ def snbutton():
         label=Label(image=snbimage)
         label.image= snbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=snbimage)
+        mainarea.create_image(pixelplace, 340, image=snbimage)
         pixelplace+=68
         counter+=2
+        add_note_time(2, False)
     else:
         print("too many notes")
 
@@ -170,9 +235,10 @@ def snrbutton():
         label=Label(image=snrbimage)
         label.image= snrbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=snrbimage)
+        mainarea.create_image(pixelplace, 373, image=snrbimage)
         pixelplace+=68
         counter+=2
+        add_note_time(2, True)
     else:
         print("too many notes")
 
@@ -184,9 +250,10 @@ def tnbutton():
         label=Label(image=tnbimage)
         label.image= tnbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=tnbimage)
+        mainarea.create_image(pixelplace, 340, image=tnbimage)
         pixelplace+=32
         counter+=1
+        add_note_time(1, False)
     else:
         print("too many notes")
 
@@ -198,32 +265,53 @@ def tnrbutton():
         label=Label(image=tnrbimage)
         label.image= tnrbimage
         label.pack
-        mainarea.create_image(pixelplace, 370, image=tnrbimage)
+        mainarea.create_image(pixelplace, 373, image=tnrbimage)
         pixelplace+=32
         counter+=1
+        add_note_time(1, True)
     else:
         print("too many notes")
 
 
-line=mainarea.create_line(0,0,0,340,tags= 'line')
+# placement line
+line=mainarea.create_line(10,0,10,700,tags= 'line')
+
+runline=False
 
 def animation(x_move, y_move):
+    global runline
     global line
-    mainarea.move(line, x_move, y_move)
-    mainarea.update()
-    mainarea.after(20)
+    if runline:
+        mainarea.move(line, x_move, y_move)
+        mainarea.update()
+        mainarea.after(20)
 
-    root.after_idle(animation,x_move, y_move)
+        root.after_idle(animation,x_move, y_move)
+
+def reset_line():
+    global line
+    global runline
+    global performCheck
+    performCheck = False
+    runline=False
+    line = mainarea.create_line(0,0,0,700, tags='line')
 
 def pbutton():
+    global runline
+    global performCheck
+    global startTime
+    startTime = int(round(time() * 1000))
+    performCheck = True
+    root.after(checkDelay,check)
+    runline=True
     animation(5,0)
-    
-    
-
 
 def delbutton():
     global pixelplace
     global counter
+    global runline
+    global performCheck
+    performCheck = False
     mainarea.create_rectangle(0,0,1600,1600,fill='white')
     pixelplace = 110
     counter=0
@@ -232,6 +320,13 @@ def delbutton():
     mainarea.create_line(100,355,1350,355,width=1)
     mainarea.create_line(100,340,1350,340,width=1)
     mainarea.create_line(100,325,1350,325,width=1)
+    logoimage=ImageTk.PhotoImage(file='Logo.png')
+    label=Label(image=logoimage)
+    label.image= logoimage
+    label.pack
+    mainarea.create_image(1100, 150, image=logoimage)
+    if runline:
+        reset_line()
     
     
 
@@ -320,7 +415,7 @@ startButton.place(x=1075, y=30)
 stopbPath = 'StopIcon.png'   
 stopbImage = Image.open(stopbPath)
 stopb = ImageTk.PhotoImage(stopbImage)
-stopButton = Button(sidebar, image=stopb, border=0)
+stopButton = Button(sidebar, image=stopb, border=0, command=reset_line)
 stopButton.place(x=1000, y=30)
 
 delbPath = 'Trash.png'   
@@ -331,6 +426,7 @@ delButton.place(x=1050, y=120)
 
 
 if __name__ == '__main__':
+    root.bind("<Key>", key_press)
     root.mainloop()
     
 #Button calls and looping
