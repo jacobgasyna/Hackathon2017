@@ -16,14 +16,18 @@ screenHeight = root.winfo_screenheight()
 root.geometry('%dx%d+%d+%d' % (screenWidth, screenHeight, 0, 0))
 
 # main area
-mainarea = Canvas(root, bg='#FFF', width=screenWidth-200)
-mainarea.pack(expand=True, fill='both', side='right')
-mainarea.create_line(0,200,screenWidth-200,200,width=3)
-mainarea.create_line(0,540,screenWidth-200,540,width=3)
+mainarea = Canvas(root, bg='#FFF', width = 1000, height=550)
+mainarea.pack(expand=True, fill='both', side='top', anchor='n')
+mainarea.create_line(100,370,1150,370,width=1)
+mainarea.create_line(100,385,1150,385,width=1)
+mainarea.create_line(100,355,1150,355,width=1)
+mainarea.create_line(100,340,1150,340,width=1)
+mainarea.create_line(100,325,1150,325,width=1)
+
 
 # sidebar
-sidebar = Frame(root, bg='#d8d8d8', width=170)
-sidebar.pack(expand=False, fill='both', side='left', anchor='nw')
+sidebar = Frame(root, bg='#d8d8d8', width=1000, height=200)
+sidebar.pack(expand=False, fill='both', side='bottom')
 
 # button calls
 
@@ -36,7 +40,7 @@ def wnbutton():
     label.image= wnbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=wnbimage)
-    pixelplace+=35
+    pixelplace+=3968
 
 def wnrbutton():
     global pixelplace
@@ -45,7 +49,7 @@ def wnrbutton():
     label.image= wnrbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=wnrbimage)
-    pixelplace+=35
+    pixelplace+=39
 
 def hnbutton():
     global pixelplace
@@ -54,7 +58,7 @@ def hnbutton():
     label.image= hnbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=hnbimage)
-    pixelplace+=35
+    pixelplace+=1920
 
 def hnrbutton():
     global pixelplace
@@ -63,7 +67,7 @@ def hnrbutton():
     label.image= hnrbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=hnrbimage)
-    pixelplace+=35
+    pixelplace+=39
 
 def qnbutton():
     global pixelplace
@@ -72,7 +76,7 @@ def qnbutton():
     label.image= qnbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=qnbimage)
-    pixelplace+=35
+    pixelplace+=400
 
 def qnrbutton():
     global pixelplace
@@ -81,7 +85,7 @@ def qnrbutton():
     label.image= qnrbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=qnrbimage)
-    pixelplace+=35
+    pixelplace+=39
 
 def enbutton():
     global pixelplace
@@ -90,7 +94,7 @@ def enbutton():
     label.image= enbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=enbimage)
-    pixelplace+=35
+    pixelplace+=200
 
 def enrbutton():
     global pixelplace
@@ -99,7 +103,7 @@ def enrbutton():
     label.image= enrbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=enrbimage)
-    pixelplace+=35
+    pixelplace+=39
 
 def snbutton():
     global pixelplace
@@ -108,7 +112,7 @@ def snbutton():
     label.image= snbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=snbimage)
-    pixelplace+=35
+    pixelplace+=39
 
 def snrbutton():
     global pixelplace
@@ -117,7 +121,7 @@ def snrbutton():
     label.image= snrbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=snrbimage)
-    pixelplace+=35
+    pixelplace+=39
 
 def tnbutton():
     global pixelplace
@@ -126,7 +130,7 @@ def tnbutton():
     label.image= tnbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=tnbimage)
-    pixelplace+=35
+    pixelplace+=39
 
 def tnrbutton():
     global pixelplace
@@ -135,17 +139,23 @@ def tnrbutton():
     label.image= tnrbimage
     label.pack
     mainarea.create_image(pixelplace, 370, image=tnrbimage)
-    pixelplace+=35
+    pixelplace+=39
 
 
+line=mainarea.create_line(0,0,0,340,tags= 'line')
 
+def animation(x_move, y_move):
+    global line
+    mainarea.move(line, x_move, y_move)
+    mainarea.update()
+    mainarea.after(20)
 
+    root.after_idle(animation,x_move, y_move)
 
-
-
-
-
-
+def pbutton():
+    animation(5,0)
+    
+    
 
 
 def delbutton():
@@ -164,92 +174,92 @@ wnPath = 'WholeNoteicon.png'
 wnImage = Image.open(wnPath)
 wn = ImageTk.PhotoImage(wnImage)
 wnButton = Button(sidebar, image=wn, border=0,command=wnbutton)
-wnButton.place(x=25, y=0)
+wnButton.place(x=75, y=30)
 
 wnRestPath = 'WholeResticon.png'   
 wnRestImage = Image.open(wnRestPath)
 wnRest = ImageTk.PhotoImage(wnRestImage)
 wnRestButton = Button(sidebar, image=wnRest, border=0,command=wnrbutton)
-wnRestButton.place(x=100, y=0)
+wnRestButton.place(x=75, y=120)
 
 hnPath = 'HalfNoteicon.png'
 hnImage = Image.open(hnPath)
 hn = ImageTk.PhotoImage(hnImage)
 hnButton = Button(sidebar, image=hn, border=0,command=hnbutton)
-hnButton.place(x=25, y=75)
+hnButton.place(x=175, y=30)
 
 hnRestPath = 'HalfResticon.png'   
 hnRestImage = Image.open(hnRestPath)
 hnRest = ImageTk.PhotoImage(hnRestImage)
 hnRestButton = Button(sidebar, image=hnRest, border=0,command=hnrbutton)
-hnRestButton.place(x=100, y=75)
+hnRestButton.place(x=175, y=120)
 
 qnPath = 'QuarterNoteicon.png'
 qnImage = Image.open(qnPath)
 qn = ImageTk.PhotoImage(qnImage)
 qnButton = Button(sidebar, image=qn, border=0,command=qnbutton)
-qnButton.place(x=25, y=150)
+qnButton.place(x=275, y=30)
 
 qnRestPath = 'QuarterResticon.png'   
 qnRestImage = Image.open(qnRestPath)
 qnRest = ImageTk.PhotoImage(qnRestImage)
 qnRestButton = Button(sidebar, image=qnRest, border=0,command= qnrbutton)
-qnRestButton.place(x=100, y=150)
+qnRestButton.place(x=275, y=120)
 
 enPath = 'EigthNoteicon.png'
 enImage = Image.open(enPath)
 en = ImageTk.PhotoImage(enImage)
 enButton = Button(sidebar, image=en, border=0,command=enbutton)
-enButton.place(x=25, y=225)
+enButton.place(x=375, y=30)
 
 enRestPath = 'EigthResticon.png'   
 enRestImage = Image.open(enRestPath)
 enRest = ImageTk.PhotoImage(enRestImage)
 enRestButton = Button(sidebar, image=enRest, border=0,command=enrbutton)
-enRestButton.place(x=100, y=225)
+enRestButton.place(x=375, y=120)
 
 snPath = 'SixteenthNoteicon.png'
 snImage = Image.open(snPath)
 sn = ImageTk.PhotoImage(snImage)
 snButton = Button(sidebar, image=sn, border=0,command=snbutton)
-snButton.place(x=25, y=300)
+snButton.place(x=475, y=30)
 
 snRestPath = 'SixteenthResticon.png'   
 snRestImage = Image.open(snRestPath)
 snRest = ImageTk.PhotoImage(snRestImage)
 snRestButton = Button(sidebar, image=snRest, border=0,command=snrbutton)
-snRestButton.place(x=100, y=300)
+snRestButton.place(x=475, y=120)
 
 tnPath = 'ThirtysecondNoteicon.png'
 tnImage = Image.open(tnPath)
 tn = ImageTk.PhotoImage(tnImage)
 tnButton = Button(sidebar,image=tn, border=0,command=tnbutton)
-tnButton.place(x=25, y=375)
+tnButton.place(x=575, y=30)
 
 tnRestPath = 'ThirtysecondResticon.png'   
 tnRestImage = Image.open(tnRestPath)
 tnRest = ImageTk.PhotoImage(tnRestImage)
 tnRestButton = Button(sidebar, image=tnRest, border=0,command=tnrbutton)
-tnRestButton.place(x=100, y=375)
+tnRestButton.place(x=575, y=120)
 
 startbPath = 'PlayIcon.png'   
 startbImage = Image.open(startbPath)
 startb = ImageTk.PhotoImage(startbImage)
-startButton = Button(sidebar, image=startb, border=0)
-startButton.place(x=60, y=440)
+startButton = Button(sidebar, image=startb, border=0,command=pbutton)
+startButton.place(x=1075, y=0)
 
 
 stopbPath = 'StopIcon.png'   
 stopbImage = Image.open(stopbPath)
 stopb = ImageTk.PhotoImage(stopbImage)
 stopButton = Button(sidebar, image=stopb, border=0)
-stopButton.place(x=60, y=495)
+stopButton.place(x=1050, y=0)
 
 delbPath = 'Trash.png'   
 delbImage = Image.open(delbPath)
 delb = ImageTk.PhotoImage(delbImage)
 delButton = Button(sidebar, image=delb, border=0,command=delbutton)
-delButton.place(x=68, y=555)
+delButton.place(x=1050, y=100)
 
 
 if __name__ == '__main__':
