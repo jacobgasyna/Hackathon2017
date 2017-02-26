@@ -289,11 +289,5 @@ delButton.place(x=1050, y=100)
 
 
 if __name__ == '__main__':
-    root.after(1000, check)
+    root.after(checkDelay, check)
     root.mainloop()
-    
-#Button calls and looping
-    
-
-    
-
