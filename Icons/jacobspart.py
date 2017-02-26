@@ -1,3 +1,14 @@
+# Copywrite © 2017 Joe Rogge, Jacob Gasyna and Adele Rehkemper
+
+#This file is part of Rhythm Trainer Pro.    Rhythm Trainer Pro is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.    Rhythm Trainer Pro is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.    You should have received a copy of the GNU General Public License
+#along with Rhythm Trainer Pro.  If not, see <http://www.gnu.org/licenses/>.
+
 from tkinter import *
 from PIL import Image, ImageTk
 from time import time
@@ -32,11 +43,12 @@ def key_press(event):
     currentTime
     if (delta < -timeRadiusInMili):
         print ("Rushing!")
+        print("You were ", abs(delta), " milliseconds early")
     elif (delta > timeRadiusInMili):
         print ("Dragging!")
+        print("You were ", delta, " milliseconds late")        
     else:
         print ("You hit it!")
-    print("now: ", currentTime, " - expected: ", expectedTime)
 
 def check():
     global currentNoteIndex
@@ -103,8 +115,8 @@ def wnbutton():
         pixelplace+=1650
         counter+=32
         add_note_time(32, False)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
         
 def wnrbutton():
     global counter
@@ -118,8 +130,8 @@ def wnrbutton():
         pixelplace+=1650
         counter+=32
         add_note_time(32, True)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 def hnbutton():
     global pixelplace
@@ -133,8 +145,8 @@ def hnbutton():
         pixelplace+=550
         counter+=16
         add_note_time(16, False)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 def hnrbutton():
     global pixelplace
@@ -148,8 +160,8 @@ def hnrbutton():
         pixelplace+=550
         counter+=16
         add_note_time(16, True)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 def qnbutton():
     global pixelplace
@@ -163,8 +175,8 @@ def qnbutton():
         pixelplace+=337
         counter+=8
         add_note_time(8, False)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
     
 
 def qnrbutton():
@@ -179,8 +191,8 @@ def qnrbutton():
         pixelplace+=337
         counter+=8
         add_note_time(8, True)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 def enbutton():
     global pixelplace
@@ -194,8 +206,8 @@ def enbutton():
         pixelplace+=147
         counter+=4
         add_note_time(4, False)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 
 def enrbutton():
@@ -210,8 +222,8 @@ def enrbutton():
         pixelplace+=147
         counter+=4
         add_note_time(4, True)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 def snbutton():
     global pixelplace
@@ -225,8 +237,8 @@ def snbutton():
         pixelplace+=68
         counter+=2
         add_note_time(2, False)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 def snrbutton():
     global pixelplace
@@ -240,8 +252,8 @@ def snrbutton():
         pixelplace+=68
         counter+=2
         add_note_time(2, True)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 def tnbutton():
     global pixelplace
@@ -255,8 +267,8 @@ def tnbutton():
         pixelplace+=32
         counter+=1
         add_note_time(1, False)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 def tnrbutton():
     global pixelplace
@@ -270,8 +282,8 @@ def tnrbutton():
         pixelplace+=32
         counter+=1
         add_note_time(1, True)
-    else:
-        print("too many notes")
+    #else:
+        #print("too many notes")
 
 
 # placement line

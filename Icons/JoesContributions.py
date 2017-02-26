@@ -1,3 +1,14 @@
+# Copywrite © 2017 Joe Rogge, Jacob Gasyna and Adele Rehkemper
+
+#This file is part of Rhythm Trainer Pro.    Rhythm Trainer Pro is free software: you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.    Rhythm Trainer Pro is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#GNU General Public License for more details.    You should have received a copy of the GNU General Public License
+#along with Rhythm Trainer Pro.  If not, see <http://www.gnu.org/licenses/>.
+
 from tkinter import *
 from PIL import Image, ImageTk
 from time import time
@@ -292,8 +303,7 @@ tnRest = ImageTk.PhotoImage(tnRestImage)
 tnRestButton = Button(sidebar, image=tnRest, border=0,command=tnrbutton)
 tnRestButton.place(x=575, y=120)
 
-startbPath = 'PlayIcon.png'   
-startbImage = Image.open(startbPath)
+startbPath = 'PlayIcon.png'   startbImage = Image.open(startbPath)
 startb = ImageTk.PhotoImage(startbImage)
 startButton = Button(sidebar, image=startb, border=0,command=pbutton)
 startButton.place(x=1075, y=0)
