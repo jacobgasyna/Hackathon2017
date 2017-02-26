@@ -18,11 +18,11 @@ root.geometry('%dx%d+%d+%d' % (screenWidth, screenHeight, 0, 0))
 # main area
 mainarea = Canvas(root, bg='#FFF', width = 1000, height=550)
 mainarea.pack(expand=True, fill='both', side='top', anchor='n')
-mainarea.create_line(100,370,1150,370,width=1)
-mainarea.create_line(100,385,1150,385,width=1)
-mainarea.create_line(100,355,1150,355,width=1)
-mainarea.create_line(100,340,1150,340,width=1)
-mainarea.create_line(100,325,1150,325,width=1)
+mainarea.create_line(100,370,1350,370,width=1)
+mainarea.create_line(100,385,1350,385,width=1)
+mainarea.create_line(100,355,1350,355,width=1)
+mainarea.create_line(100,340,1350,340,width=1)
+mainarea.create_line(100,325,1350,325,width=1)
 
 
 # sidebar
@@ -32,116 +32,177 @@ sidebar.pack(expand=False, fill='both', side='bottom')
 # button calls
 
 pixelplace=110
+counter=0
 
 def wnbutton():
     global pixelplace
-    wnbimage=ImageTk.PhotoImage(file='WholeNoteicon.png')
-    label=Label(image=wnbimage)
-    label.image= wnbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=wnbimage)
-    pixelplace+=1650
+    global counter
+    if counter+32<33:
+        wnbimage=ImageTk.PhotoImage(file='WholeNoteicon.png')
+        label=Label(image=wnbimage)
+        label.image= wnbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=wnbimage)
+        pixelplace+=1650
+        counter+=32
+    else:
+        print("too many notes")
         
 def wnrbutton():
+    global counter
     global pixelplace
-    wnrbimage=ImageTk.PhotoImage(file='WholeResticon.png')
-    label=Label(image=wnrbimage)
-    label.image= wnrbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=wnrbimage)
-    pixelplace+=1650
+    if counter+32<33:
+        wnrbimage=ImageTk.PhotoImage(file='WholeResticon.png')
+        label=Label(image=wnrbimage)
+        label.image= wnrbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=wnrbimage)
+        pixelplace+=1650
+        counter+=32
+    else:
+        print("too many notes")
 
 def hnbutton():
     global pixelplace
-    hnbimage=ImageTk.PhotoImage(file='HalfNoteicon.png')
-    label=Label(image=hnbimage)
-    label.image= hnbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=hnbimage)
-    pixelplace+=550
+    global counter
+    if counter+16<33:
+        hnbimage=ImageTk.PhotoImage(file='HalfNoteicon.png')
+        label=Label(image=hnbimage)
+        label.image= hnbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=hnbimage)
+        pixelplace+=550
+        counter+=16
+    else:
+        print("too many notes")
 
 def hnrbutton():
     global pixelplace
-    hnrbimage=ImageTk.PhotoImage(file='HalfResticon.png')
-    label=Label(image=hnrbimage)
-    label.image= hnrbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=hnrbimage)
-    pixelplace+=550
+    global counter
+    if counter+32<33:
+        hnrbimage=ImageTk.PhotoImage(file='HalfResticon.png')
+        label=Label(image=hnrbimage)
+        label.image= hnrbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=hnrbimage)
+        pixelplace+=550
+        counter+=16
+    else:
+        print("too many notes")
 
 def qnbutton():
     global pixelplace
-    qnbimage=ImageTk.PhotoImage(file='QuarterNoteicon.png')
-    label=Label(image=qnbimage)
-    label.image= qnbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=qnbimage)
-    pixelplace+=337
+    global counter
+    if counter+8<33:
+        qnbimage=ImageTk.PhotoImage(file='QuarterNoteicon.png')
+        label=Label(image=qnbimage)
+        label.image= qnbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=qnbimage)
+        pixelplace+=337
+        counter+=8
+    else:
+        print("too many notes")
     
 
 def qnrbutton():
     global pixelplace
-    qnrbimage=ImageTk.PhotoImage(file='QuarterResticon.png')
-    label=Label(image=qnrbimage)
-    label.image= qnrbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=qnrbimage)
-    pixelplace+=337
+    global counter
+    if counter+8<33:
+        qnrbimage=ImageTk.PhotoImage(file='QuarterResticon.png')
+        label=Label(image=qnrbimage)
+        label.image= qnrbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=qnrbimage)
+        pixelplace+=337
+        counter+=8
+    else:
+        print("too many notes")
 
 def enbutton():
     global pixelplace
-    enbimage=ImageTk.PhotoImage(file='EigthNoteicon.png')
-    label=Label(image=enbimage)
-    label.image= enbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=enbimage)
-    pixelplace+=147
+    global counter
+    if counter+4<33:
+        enbimage=ImageTk.PhotoImage(file='EigthNoteicon.png')
+        label=Label(image=enbimage)
+        label.image= enbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=enbimage)
+        pixelplace+=147
+        counter+=4
+    else:
+        print("too many notes")
 
 
 def enrbutton():
     global pixelplace
-    enrbimage=ImageTk.PhotoImage(file='EigthResticon.png')
-    label=Label(image=enrbimage)
-    label.image= enrbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=enrbimage)
-    pixelplace+=147
+    global counter
+    if counter+4<33:
+        enrbimage=ImageTk.PhotoImage(file='EigthResticon.png')
+        label=Label(image=enrbimage)
+        label.image= enrbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=enrbimage)
+        pixelplace+=147
+        counter+=4
+    else:
+        print("too many notes")
 
 def snbutton():
     global pixelplace
-    snbimage=ImageTk.PhotoImage(file='SixteenthNoteicon.png')
-    label=Label(image=snbimage)
-    label.image= snbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=snbimage)
-    pixelplace+=68
+    global counter
+    if counter+2<33:
+        snbimage=ImageTk.PhotoImage(file='SixteenthNoteicon.png')
+        label=Label(image=snbimage)
+        label.image= snbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=snbimage)
+        pixelplace+=68
+        counter+=2
+    else:
+        print("too many notes")
 
 def snrbutton():
     global pixelplace
-    snrbimage=ImageTk.PhotoImage(file='SixteenthResticon.png')
-    label=Label(image=snrbimage)
-    label.image= snrbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=snrbimage)
-    pixelplace+=68
+    global counter
+    if counter+2<33:
+        snrbimage=ImageTk.PhotoImage(file='SixteenthResticon.png')
+        label=Label(image=snrbimage)
+        label.image= snrbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=snrbimage)
+        pixelplace+=68
+        counter+=2
+    else:
+        print("too many notes")
 
 def tnbutton():
     global pixelplace
-    tnbimage=ImageTk.PhotoImage(file='ThirtysecondNoteicon.png')
-    label=Label(image=tnbimage)
-    label.image= tnbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=tnbimage)
-    pixelplace+=32
+    global counter
+    if counter+1<33:
+        tnbimage=ImageTk.PhotoImage(file='ThirtysecondNoteicon.png')
+        label=Label(image=tnbimage)
+        label.image= tnbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=tnbimage)
+        pixelplace+=32
+        counter+=1
+    else:
+        print("too many notes")
 
 def tnrbutton():
     global pixelplace
-    tnrbimage=ImageTk.PhotoImage(file='ThirtysecondResticon.png')
-    label=Label(image=tnrbimage)
-    label.image= tnrbimage
-    label.pack
-    mainarea.create_image(pixelplace, 370, image=tnrbimage)
-    pixelplace+=32
+    global counter
+    if counter+1<33:
+        tnrbimage=ImageTk.PhotoImage(file='ThirtysecondResticon.png')
+        label=Label(image=tnrbimage)
+        label.image= tnrbimage
+        label.pack
+        mainarea.create_image(pixelplace, 370, image=tnrbimage)
+        pixelplace+=32
+        counter+=1
+    else:
+        print("too many notes")
 
 
 line=mainarea.create_line(0,0,0,340,tags= 'line')
@@ -162,10 +223,15 @@ def pbutton():
 
 def delbutton():
     global pixelplace
+    global counter
     mainarea.create_rectangle(0,0,1600,1600,fill='white')
-    pixelplace=15
-    mainarea.create_line(0,200,screenWidth-200,200,width=3)
-    mainarea.create_line(0,540,screenWidth-200,540,width=3)
+    pixelplace = 110
+    counter=0
+    mainarea.create_line(100,370,1350,370,width=1)
+    mainarea.create_line(100,385,1350,385,width=1)
+    mainarea.create_line(100,355,1350,355,width=1)
+    mainarea.create_line(100,340,1350,340,width=1)
+    mainarea.create_line(100,325,1350,325,width=1)
     
     
 
@@ -248,20 +314,20 @@ startbPath = 'PlayIcon.png'
 startbImage = Image.open(startbPath)
 startb = ImageTk.PhotoImage(startbImage)
 startButton = Button(sidebar, image=startb, border=0,command=pbutton)
-startButton.place(x=1075, y=0)
+startButton.place(x=1075, y=30)
 
 
 stopbPath = 'StopIcon.png'   
 stopbImage = Image.open(stopbPath)
 stopb = ImageTk.PhotoImage(stopbImage)
 stopButton = Button(sidebar, image=stopb, border=0)
-stopButton.place(x=1050, y=0)
+stopButton.place(x=1000, y=30)
 
 delbPath = 'Trash.png'   
 delbImage = Image.open(delbPath)
 delb = ImageTk.PhotoImage(delbImage)
 delButton = Button(sidebar, image=delb, border=0,command=delbutton)
-delButton.place(x=1050, y=100)
+delButton.place(x=1050, y=120)
 
 
 if __name__ == '__main__':
