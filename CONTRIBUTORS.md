@@ -1,3 +1,5 @@
+Welcome to Rhythm Trainer Pro
+
 Contributors
 - Jacob Gasyna
  * GUI Design and Backend programming
@@ -7,3 +9,5 @@ Contributors
  * GUI Design and Backend Programming
 
 No mentors
+
+
