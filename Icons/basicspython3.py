@@ -167,7 +167,7 @@ def tnrbutton():
     mainarea.create_image(pixelplace, 370, image=tnrbimage)
     pixelplace+=39
 
-
+# placement line
 line=mainarea.create_line(0,0,0,340,tags= 'line')
 
 def animation(x_move, y_move):
@@ -178,11 +178,12 @@ def animation(x_move, y_move):
 
     root.after_idle(animation,x_move, y_move)
 
+def reset_line():
+    global line
+    line = mainarea.create_line(0,0,0,340, tags='line')
+
 def pbutton():
     animation(5,0)
-    
-    
-
 
 def delbutton():
     global pixelplace
@@ -190,9 +191,6 @@ def delbutton():
     pixelplace=15
     mainarea.create_line(0,200,screenWidth-200,200,width=3)
     mainarea.create_line(0,540,screenWidth-200,540,width=3)
-    
-    
-
     
 # make buttons
 
@@ -274,11 +272,10 @@ startb = ImageTk.PhotoImage(startbImage)
 startButton = Button(sidebar, image=startb, border=0,command=pbutton)
 startButton.place(x=1075, y=0)
 
-
 stopbPath = 'StopIcon.png'   
 stopbImage = Image.open(stopbPath)
 stopb = ImageTk.PhotoImage(stopbImage)
-stopButton = Button(sidebar, image=stopb, border=0)
+stopButton = Button(sidebar, image=stopb, border=0, command=reset_line())
 stopButton.place(x=1050, y=0)
 
 delbPath = 'Trash.png'   
