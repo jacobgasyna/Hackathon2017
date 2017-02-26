@@ -8,12 +8,12 @@ expectedNoteTimes = [initial]
 
 # milisecond window user has to "hit" a note
 # length is twice timeRadiusInMili centered around the exact expected time
-timeRadiusInMili = 500
-checkDelay = 1000
+timeRadiusInMili = 90
+checkDelay = 100
 performCheck = False
 
 # the duration of a 32nd note in miliseconds given a tempo
-duration32InMili = 175
+duration32InMili = 185
 
 def increment_current_note_index():
     global currentNoteIndex
@@ -27,25 +27,26 @@ def key_press(event):
     global currentNoteIndex
     global startTime
     currentTime = int(round(time() * 1000)) - startTime
-    print(currentTime)
-    delta = currentTime - expectedNoteTimes[currentNoteIndex]
+    expectedTime = expectedNoteTimes[currentNoteIndex]
+    delta = currentTime - expectedTime
     currentTime
-    #if (delta < -timeRadiusInMili):
-    #    print ("Rushing!")
-    #elif (delta > timeRadiusInMili):
-    #    print ("Dragging!")
-    #else:
-    #    print ("You hit it!")
+    if (delta < -timeRadiusInMili):
+        print ("Rushing!")
+    elif (delta > timeRadiusInMili):
+        print ("Dragging!")
+    else:
+        print ("You hit it!")
+    print("now: ", currentTime, " - expected: ", expectedTime)
 
 def check():
     global currentNoteIndex
-    currentTime = int(round(time() * 1000))
-    delta = abs(currentTime - expectedNoteTimes[currentNoteIndex])
+    currentTime = int(round(time() * 1000)) - startTime
+    delta = currentTime - expectedNoteTimes[currentNoteIndex]
     if(delta > timeRadiusInMili):
         #print ("missed")
         increment_current_note_index()
-        if performCheck:
-            root.after(checkDelay, check)
+    if performCheck:
+        root.after(checkDelay, check)
 
 def add_note_time(noteType, isRest):
     lastIndex = len(expectedNoteTimes) - 1
@@ -292,9 +293,11 @@ def reset_line():
     global line
     global runline
     global performCheck
+    global currentNoteIndex
+    currentNoteIndex = 0
     performCheck = False
     runline=False
-    line = mainarea.create_line(0,0,0,700, tags='line')
+    line = mainarea.create_line(10,0,10,700, tags='line')
 
 def pbutton():
     global runline
@@ -311,6 +314,8 @@ def delbutton():
     global counter
     global runline
     global performCheck
+    global expectedNoteTimes
+    expectedNoteTimes = [initial]
     performCheck = False
     mainarea.create_rectangle(0,0,1600,1600,fill='white')
     pixelplace = 110
